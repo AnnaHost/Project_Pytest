@@ -14,5 +14,5 @@ def test_guest_can_go_to_login_page(browser):
     # page.go_to_login_page()
     page2 = LoginPage(browser, link2)
     page2.open()
-    time.sleep(15)
+    print("1231")
     page2.should_be_login_page()
