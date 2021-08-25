@@ -15,8 +15,13 @@ class BasePage:
 
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
-        print("go_to_login_page")
+        print("go_to_login_page\n")
         login_link.click()
+
+    def go_to_basket_page(self):
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+        print("go_to_basket_page\n")
+        basket_link.click()
 
     def open(self):
         self.browser.get(self.url)
@@ -60,4 +65,4 @@ class BasePage:
             print(f"Your code: {alert_text}")
             alert.accept()
         except NoAlertPresentException:
-            print("No second alert presented")
+            print("No second alert presented\n")
