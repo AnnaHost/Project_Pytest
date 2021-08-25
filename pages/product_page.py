@@ -1,3 +1,4 @@
+import selenium
 from .base_page import BasePage
 from .locators import ProductPageLocators
 from selenium.webdriver.common.by import By
@@ -30,3 +31,14 @@ class ProductPage(BasePage):
         assert alert_book_price == cart_book_price, "Названия не совпадают!"
         print(
             f"alert_book_name is {alert_book_price} and cart_book_name is {cart_book_price}\n")
+
+    def test_guest_should_see_login_link_on_product_page(browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+
+    def should_not_be_success_message(self):
+        assert self.is_element_not_present(
+            *ProductPageLocators.ALERT_BOOK_NAME), "Успешный алерт отображается, хотя не должен"
+
+    def should_dissapeared(self):
+        assert self.is_disappeared(
+            *ProductPageLocators.ALERT_BOOK_NAME), "Текст не исчезает, хотя должен"
