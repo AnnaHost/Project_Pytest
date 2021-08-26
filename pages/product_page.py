@@ -13,6 +13,14 @@ class ProductPage(BasePage):
         add_button.click()
         print("Button click")
 
+    def basket_should_be_empty(self):
+        assert self.is_element_present(
+            *BasketPageLocators.BASKET_EMPTY_TEXT), "Сообщение о пустой корзине не отображается!"
+
+    def check_items_in_basket(self):
+        assert self.is_element_not_present(
+            *BasketPageLocators.ITEMS_IN_BASKET), "В корзине есть товары!"
+
     def check_item_name(self):
         print("check_item_name..\n")
         alert_book_name = self.browser.find_element(
@@ -36,14 +44,6 @@ class ProductPage(BasePage):
     def should_not_be_success_message(self):
         assert self.is_element_not_present(
             *ProductPageLocators.ALERT_BOOK_NAME), "Успешный алерт отображается, хотя не должен"
-
-    def basket_should_be_empty(self):
-        assert self.is_element_present(
-            *BasketPageLocators.BASKET_EMPTY_TEXT), "Сообщение о пустой корзине не отображается!"
-
-    def chec_item_in_basket(self):
-        assert self.is_element_not_present(
-            *BasketPageLocators.ITEMS_IN_BASKET), "В корзине есть товары!"
 
     def should_dissapeared(self):
         assert self.is_disappeared(

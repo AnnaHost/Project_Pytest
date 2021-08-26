@@ -1,4 +1,5 @@
 from .locators import BasePageLocators
+from .locators import LoginPageLocators
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
 
@@ -22,3 +23,6 @@ class LoginPage(BasePage):
         # реализуйте проверку, что есть форма регистрации на странице
         assert self.is_element_present(
             *BasePageLocators.REGISTRATION_LINK), "Отсутствует форма регистрации"
+
+    def register_new_user():
+        print("register_new_user")

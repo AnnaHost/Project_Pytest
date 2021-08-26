@@ -36,41 +36,53 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     page.open()
     page.go_to_basket_page()
     page.basket_should_be_empty()
-    page.chec_item_in_basket()
-
-
-@pytest.mark.parametrize('links', LINKS)
-def test_guest_can_add_product_to_cart(browser, links):
-    page = ProductPage(browser, links)
-    page.open()
-    page.add_item_to_basket()
-    page.solve_quiz_and_get_code()
-    page.check_item_name()
-    page.check_item_price()
-
-
-@pytest.mark.xfail
-@pytest.mark.product
-def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7"
-    page = ProductPage(browser, link)
-    page.open()
-    page.add_item_to_basket()
-    page.should_not_be_success_message()
+    page.check_items_in_basket()
 
 
 @pytest.mark.product
-def test_guest_cant_see_success_message(browser):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
-    page = ProductPage(browser, link)
-    page.open()
-    page.should_not_be_success_message()
+class TestProductPage():
+
+    def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7"
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_item_to_basket()
+        page.should_not_be_success_message()
+
+    def test_guest_cant_see_success_message(browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
+    def test_message_disappeared_after_adding_product_to_basket(browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_item_to_basket()
+        page.should_dissapeared()
+
+    @pytest.mark.parametrize('links', LINKS)
+    def test_guest_can_add_product_to_cart(browser, links):
+        page = ProductPage(browser, links)
+        page.open()
+        page.add_item_to_basket()
+        page.solve_quiz_and_get_code()
+        page.check_item_name()
+        page.check_item_price()
 
 
-@pytest.mark.product
-def test_message_disappeared_after_adding_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
-    page = ProductPage(browser, link)
-    page.open()
-    page.add_item_to_basket()
-    page.should_dissapeared()
+class TestUserAddToBasketFromProductPage():
+
+    def test_user_cant_see_success_message_after_adding_product_to_basket(browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7"
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_item_to_basket()
+        page.should_not_be_success_message()
+
+    def test_user_cant_see_success_message(browser):
+        link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
